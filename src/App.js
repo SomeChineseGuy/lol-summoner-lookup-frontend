@@ -16,8 +16,10 @@ class App extends Component {
         if (res.status !== 200) throw Error(res.message);
     }
 
-    handleChange(e) {
-
+    handleSubmit(e) {
+        e.preventDeafult()
+        this.setState({searchSummoner: e.target.value})
+       
     }
 
     componentDidMount() {
@@ -28,7 +30,15 @@ class App extends Component {
         return (
             <div>
                 <p>{this.state.serverAPI}</p>
-                <input/>
+                <form onSubmit={this.handleSubmit}>
+                    <h1>Type in Summoner Name</h1>
+                    <input
+                        type="text"
+                        onChange={e => this.setState({searchSummoner: e.target.value})}
+                    />
+                    <button type="submit">Search now!</button>
+                </form>
+                <p>The summoner you searched for is {this.state.searchSummoner}</p>
             </div>
         )
     }
