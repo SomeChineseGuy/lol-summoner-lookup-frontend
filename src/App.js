@@ -7,13 +7,16 @@ import './App.css';
 class App extends Component {
     state = {
         serverAPI: null,
+        searchSummoner: null
     }
 
     callAPI = async () => {
         const res = await axios.get('http://localhost:5000/api')
         this.setState({serverAPI: res.data})
-        console.log(this.state.serverAPI)
+        if (response.status !== 200) throw Error(res.message);
     }
+
+    
 
     componentDidMount() {
         this.callAPI();
@@ -23,6 +26,7 @@ class App extends Component {
         return (
             <div>
                 <p>{this.state.serverAPI}</p>
+                <input/>
             </div>
         )
     }
