@@ -17,8 +17,8 @@ class App extends Component {
     }
 
     handleSubmit(e) {
-        e.preventDeafult()
-        this.setState({searchSummoner: e.target.value})
+        e.preventDefault();
+        
        
     }
 
