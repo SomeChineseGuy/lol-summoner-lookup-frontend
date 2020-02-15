@@ -7,7 +7,8 @@ import './App.css';
 class App extends Component {
     state = {
         serverAPI: null,
-        searchSummoner: null
+        searchSummoner: null,
+        typeCheck: null
     }
 
     callAPI = async () => {
@@ -16,11 +17,18 @@ class App extends Component {
         if (res.status !== 200) throw Error(res.message);
     }
 
-    handleSubmit(e) {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios
-                            .fetch()
+        const res = await axios.post('/api/search', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: this.state.searchSummoner
+        })
+
+        const body = await res.text();
        
+        this.setState({searchSummoner: body})
     }
 
     componentDidMount() {
@@ -35,7 +43,7 @@ class App extends Component {
                     <h1>Type in Summoner Name</h1>
                     <input
                         type="text"
-                        onChange={e => this.setState({searchSummoner: e.target.value})}
+                        onChange={e => this.setState({typeCheck: e.target.value})}
                     />
                     <button type="submit">Search now!</button>
                 </form>
