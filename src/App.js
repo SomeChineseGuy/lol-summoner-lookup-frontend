@@ -13,10 +13,12 @@ class App extends Component {
     callAPI = async () => {
         const res = await axios.get('http://localhost:5000/api')
         this.setState({serverAPI: res.data})
-        if (response.status !== 200) throw Error(res.message);
+        if (res.status !== 200) throw Error(res.message);
     }
 
-    
+    handleChange(e) {
+
+    }
 
     componentDidMount() {
         this.callAPI();
