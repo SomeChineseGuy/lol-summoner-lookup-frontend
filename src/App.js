@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
 
@@ -8,10 +9,20 @@ class App extends Component {
         serverAPI: null,
     }
 
+    callAPI = async () => {
+        const res = await axios.get('http://localhost:5000/api')
+        this.setState({serverAPI: res.data})
+        console.log(this.state.serverAPI)
+    }
+
+    componentDidMount() {
+        this.callAPI();
+    }
+
      render() {
         return (
             <div>
-                <p>Hello!</p>
+                <p>{this.state.serverAPI}</p>
             </div>
         )
     }
