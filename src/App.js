@@ -12,7 +12,7 @@ class App extends Component {
     }
 
     callAPI = async () => {
-        const res = await axios.get('http://localhost:5000/api')
+        const res = await axios.get('/api')
         this.setState({serverAPI: res.data})
         if (res.status !== 200) throw Error(res.message);
     }
