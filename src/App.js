@@ -19,16 +19,18 @@ class App extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post('/api/search', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: this.state.searchSummoner
+        axios.post('http://localhost:5000/api/search', {
+            method: 'POST',
+            data: {
+                headers: { 
+                    'Content-Type': 'application/json' 
+                    } 
+                },
+            body: JSON.stringify({
+                searchName: this.state.searchSummoner
+            })
         })
-
-        const body = await res.text();
-       
-        this.setState({searchSummoner: body})
+ 
     }
 
     componentDidMount() {
@@ -43,7 +45,7 @@ class App extends Component {
                     <h1>Type in Summoner Name</h1>
                     <input
                         type="text"
-                        onChange={e => this.setState({typeCheck: e.target.value})}
+                        onChange={e => this.setState({searchSummoner: e.target.value})}
                     />
                     <button type="submit">Search now!</button>
                 </form>
@@ -52,27 +54,5 @@ class App extends Component {
         )
     }
 }
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
